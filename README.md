@@ -1,9 +1,4 @@
-Kavan2003: @workspace 
-according to workspace and IDEA create me a REadME.MD file. for github that enhance my potfollio
-IDEA:{Design a course creation copilot, to help instructors with designing new online courses. Should have copilots for translating course content into Indian languages, adding images, animations, voiceovers, and lecture notes. The idea is to reduce the time it takes for anyone to create an online course, while delivering production-grade course quality. Can be deployed as a Chrome extension, Webapp or Smartphone app. Participants are encouraged to use Gemini and Sarvam APIs (ASR, Translation, TTS, Audio LM) to build this solution. Participants can apply for access to Sarvam APIs here.}
 
-
-Workspace: # CourseHelp
 
 CourseHelp is a Flutter-based application designed to assist instructors in creating high-quality online courses efficiently. This project aims to reduce the time and effort required to design and produce online courses by providing various copilots for translating content, adding multimedia elements, and generating lecture notes.
 
