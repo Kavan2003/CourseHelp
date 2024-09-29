@@ -35,7 +35,7 @@ CourseHelp is a Flutter-based application designed to assist instructors in crea
     ```
 
 3. **Set up environment variables**:
-    - Create a [`.env`](command:_github.copilot.openRelativePath?%5B%7B%22scheme%22%3A%22file%22%2C%22authority%22%3A%22%22%2C%22path%22%3A%22%2FC%3A%2FUsers%2FKavan%2Fdevelopment%2Fprojects%2Fcoursehelp%2F.env%22%2C%22query%22%3A%22%22%2C%22fragment%22%3A%22%22%7D%2C%2212a6decf-6f1a-4d55-a955-4dd100ff1b44%22%5D "c:\Users\Kavan\development\projects\coursehelp\.env") file in the root directory.
+    - Create a [`.env`] file in the root directory.
     - Add your API keys:
       ```env
       API_KEY=your_sarvam_api_key
@@ -102,11 +102,7 @@ CourseHelp is a Flutter-based application designed to assist instructors in crea
 
 ## Contributing
 
-We welcome contributions! Please read our [Contributing Guidelines](CONTRIBUTING.md) for more details.
-
-## License
-
-This project is licensed under the MIT License. See the LICENSE file for details.
+We welcome contributions! 
 
 ## Acknowledgements
 
@@ -118,5 +114,3 @@ This project is licensed under the MIT License. See the LICENSE file for details
 For any inquiries, please contact [kavanthosani2003@gmail.com](mailto:kavanthosani2003@gmail.com).
 
 ---
-
-Enhance your portfolio by showcasing your ability to create a comprehensive course creation tool that leverages cutting-edge APIs and technologies.
