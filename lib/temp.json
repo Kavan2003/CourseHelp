@@ -1,0 +1,112 @@
+{
+  "title": "Flutter State Management",
+  "description": "Managing application state: Stateful widgets, Provider, BLoC pattern. Implementing data persistence.",
+  "duration": 90,
+  "modules": [
+    {
+      "module_number": 1,
+      "module_title": "Fundamentals of State Management",
+      "module_duration": 30,
+      "submodules": [
+        {
+          "submodule_number": 1.1,
+          "submodule_title": "Introduction to State Management",
+          "submodule_duration": 5,
+          "content": "Explain the concept of state in Flutter apps: data that changes over time, affecting the UI. Define state management as the process of handling and updating this state. Discuss the challenges of managing state in complex applications: data flow, consistency, and performance.",
+          "Diagram": "Mind Map showing different types of State Management: Stateless, Stateful, and External State Management"
+        },
+        {
+          "submodule_number": 1.2,
+          "submodule_title": "Stateful Widgets: Managing Internal State",
+          "submodule_duration": 10,
+          "content": "Explain the basics of Stateful widgets in Flutter. Describe their key properties: state variables, setState() method, and rebuilding the widget tree. Provide examples of using Stateful widgets for simple UI updates. Discuss the limitations of managing state directly within widgets, especially in larger applications.",
+          "Diagram": "Flowchart showing the lifecycle of a StatefulWidget: initState, build, setState, dispose"
+        },
+        {
+          "submodule_number": 1.3,
+          "submodule_title": "Introduction to External State Management Solutions",
+          "submodule_duration": 5,
+          "content": "Explain the need for external state management solutions. Discuss the benefits of separating state logic from UI components: improved maintainability, easier testing, and better code organization. Briefly introduce popular state management solutions like Provider, BLoC, and MobX.",
+          "Diagram": "NULL"
+        },
+        {
+          "submodule_number": 1.4,
+          "submodule_title": "Practical Example: Using Provider",
+          "submodule_duration": 10,
+          "content": "Introduce the Provider package. Explain how to set up a Provider for managing application state. Demonstrate how to consume the Provider in widgets to access and update state data. Discuss the advantages of using Provider for simple state management scenarios.",
+          "Diagram": "NULL"
+        }
+      ]
+    },
+    {
+      "module_number": 2,
+      "module_title": "Advanced State Management with BLoC",
+      "module_duration": 30,
+      "submodules": [
+        {
+          "submodule_number": 2.1,
+          "submodule_title": "Understanding the BLoC Pattern",
+          "submodule_duration": 5,
+          "content": "Explain the Business Logic Component (BLoC) pattern. Describe its core elements: BLoCs, Events, and States. Discuss how BLoCs handle business logic and events, emitting states that update the UI.  Explain the separation of concerns between UI and logic.",
+          "Diagram": "Flowchart showing the BLoC pattern: UI sends events, BLoC processes events and emits states, UI listens to states and updates itself"
+        },
+        {
+          "submodule_number": 2.2,
+          "submodule_title": "Implementing a BLoC",
+          "submodule_duration": 10,
+          "content": "Demonstrate the implementation of a simple BLoC. Define BLoC, Event, and State classes. Implement event handling, state updates, and stream management. Provide examples of using the BLoC to manage UI interactions and data changes.",
+          "Diagram": "NULL"
+        },
+        {
+          "submodule_number": 2.3,
+          "submodule_title": "Advantages and Challenges of BLoC",
+          "submodule_duration": 5,
+          "content": "Discuss the benefits of using BLoC: improved testability, better code organization, easier to reason about state changes. Mention the potential challenges associated with BLoC: increased complexity for simple applications, learning curve for new developers.",
+          "Diagram": "NULL"
+        },
+        {
+          "submodule_number": 2.4,
+          "submodule_title": "Integration with Provider and Flutter",
+          "submodule_duration": 10,
+          "content": "Explain how to integrate a BLoC with the Provider package for streamlined state management. Show how to use Provider to inject the BLoC into widgets. Demonstrate the use of the BLoC for managing complex UI interactions and data flow.",
+          "Diagram": "NULL"
+        }
+      ]
+    },
+    {
+      "module_number": 3,
+      "module_title": "Data Persistence and State Management",
+      "module_duration": 30,
+      "submodules": [
+        {
+          "submodule_number": 3.1,
+          "submodule_title": "Introduction to Data Persistence",
+          "submodule_duration": 5,
+          "content": "Explain the concept of data persistence: storing application data locally or remotely to maintain state across sessions. Discuss various persistence methods: SharedPreferences, SQLite, local files, and remote databases.",
+          "Diagram": "Mind Map showing different Data Persistence Methods"
+        },
+        {
+          "submodule_number": 3.2,
+          "submodule_title": "Using SharedPreferences for Simple Data",
+          "submodule_duration": 10,
+          "content": "Demonstrate using SharedPreferences to store and retrieve basic data like user settings and preferences. Explain how SharedPreferences works and its advantages for simple key-value storage. Provide code examples of using SharedPreferences for storing and retrieving data.",
+          "Diagram": "NULL"
+        },
+        {
+          "submodule_number": 3.3,
+          "submodule_title": "Integrating Data Persistence with State Management",
+          "submodule_duration": 10,
+          "content": "Discuss how to integrate data persistence with state management solutions like Provider and BLoC. Explain how to load data from persistent storage when the app starts and save changes made to the state.  Demonstrate a practical example of integrating data persistence with BLoC.",
+          "Diagram": "NULL"
+        },
+        {
+          "submodule_number": 3.4,
+          "submodule_title": "Considerations for Data Persistence",
+          "submodule_duration": 5,
+          "content": "Discuss factors to consider when choosing a persistence method: data size, complexity, security, and performance. Mention best practices for data persistence, including security considerations and data validation.",
+          "Diagram": "NULL"
+        }
+      ]
+    }
+  ]
+}
