@@ -1,11 +1,10 @@
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
-import 'package:coursehelp/Models/course_outine_model.dart';
 import 'package:coursehelp/Models/modules_details_model.dart';
 import 'package:coursehelp/main.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
-import 'package:meta/meta.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'moduledetail_event.dart';
 part 'moduledetail_state.dart';
@@ -15,6 +14,15 @@ class ModuledetailBloc extends Bloc<ModuledetailEvent, ModuledetailState> {
     on<GenerateModuleDetail>((event, emit) async {
       emit(ModuledetailLoading());
       try {
+        final prefs = await SharedPreferences.getInstance();
+        final cachedModule = prefs.getString(
+            'module_${event.title}_${event.description}_${event.duration}');
+        if (cachedModule != null) {
+          final json = jsonDecode(cachedModule);
+          final module = Lessons.fromJson(json);
+          emit(ModuledetailLoaded(module));
+          return;
+        }
         final String prompt = '''
 
 
@@ -104,71 +112,13 @@ Foramt example is given below
                 GenerationConfig(responseMimeType: "application/json"));
 
         print(response.text);
-        // TODO: Temp remove afterwards
-//         String tempjson = '''
-// {
-//   "title": "Introduction to App Development",
-//   "description": "What is App Development? How does it work? what is Native developemtn , cross platform and its market share.",
-//   "duration": 20,
-//   "modules": [
-//     {
-//       "module_number": 1,
-//       "module_title": "Introduction to App Development",
-//       "module_duration": 8,
-//       "submodules": [
-//         {
-//           "submodule_number": 1.1,
-//           "submodule_title": "What is App Development?",
-//           "submodule_duration": 3,
-//           "content": "Explain the concept of app development: Creating software applications for mobile devices (smartphones, tablets). Discuss various types of apps: games, social media, productivity tools, e-commerce. Provide relatable examples of popular apps.",
-//           "Diagram": "NULL"
-//         },
-//         {
-//           "submodule_number": 1.2,
-//           "submodule_title": "How App Development Works: A High-Level Overview",
-//           "submodule_duration": 5,
-//           "content": "Discuss the basic process: Ideation (coming up with an app idea), Design (creating the app's look and feel), Development (writing the code), Testing (ensuring the app works as intended), Deployment (making the app available on app stores). Use a simple flow chart to visualize these stages: Ideation -> Design -> Development -> Testing -> Deployment.",
-//           "Diagram": "Flow chart for App Development Lifecycle with stages: Ideation -> Design -> Development -> Testing -> Deployment"
-//         }
-//       ]
-//     },
-//     {
-//       "module_number": 2,
-//       "module_title": "Types of App Development and Market Share",
-//       "module_duration": 12,
-//       "submodules": [
-//         {
-//           "submodule_number": 2.1,
-//           "submodule_title": "Native App Development",
-//           "submodule_duration": 4,
-//           "content": "Explain Native app development: Building apps for a specific platform (iOS or Android) using platform-specific programming languages (Swift/Objective-C for iOS, Java/Kotlin for Android). Discuss advantages: best performance, access to all device features. Mention drawbacks: platform-specific codebase, requires expertise in multiple languages if targeting both iOS and Android.",
-//           "Diagram": "NULL"
-//         },
-//         {
-//           "submodule_number": 2.2,
-//           "submodule_title": "Cross-Platform App Development",
-//           "submodule_duration": 4,
-//           "content": "Explain Cross-platform app development: Using frameworks like React Native, Flutter, or Xamarin to write code once and deploy it on multiple platforms. Discuss advantages: faster development, cost-effective, single codebase. Mention potential drawbacks: performance limitations compared to native, may not have access to all platform-specific features.",
-//           "Diagram": "NULL"
-//         },
-//         {
-//           "submodule_number": 2.3,
-//           "submodule_title": "Market Share: Native vs. Cross-Platform",
-//           "submodule_duration": 4,
-//           "content": "Discuss the current market share of native and cross-platform apps. Show a pie chart illustrating the approximate distribution (e.g., Native: 60%, Cross-platform: 40%). Highlight the factors influencing the choice between native and cross-platform: budget, timeline, desired features, target audience.",
-//           "Diagram": "Pie chart showing approximate market share of Native and Cross-Platform apps"
-//         }
-//       ]
-//     }
-//   ]
-// }
-
-// ''';
-        //
-        // final course = await generateCourseOutline(event.title, event.description);
         if (response.text != null || response.text != "") {
           final json = jsonDecode(response.text!);
           final module = Lessons.fromJson(json);
+          prefs.setString(
+              'module_${event.title}_${event.description}_${event.duration}',
+              response.text!);
+
           emit(ModuledetailLoaded(module));
         } else {
           emit(ModuledetailError(
@@ -178,5 +128,17 @@ Foramt example is given below
         emit(ModuledetailError('Error generating course outline  $e'));
       }
     });
+    on<EditGeneratedModuleDetails>(
+      (event, emit) async {
+        final prefs = await SharedPreferences.getInstance();
+        prefs.remove(
+            'module_${event.title}_${event.description}_${event.duration}');
+        final cashed = prefs.setString(
+            'module_${event.title}_${event.description}_${event.duration}',
+            event.module.toJson().toString());
+        emit(ModuledetailLoading());
+        emit(ModuledetailLoaded(event.module));
+      },
+    );
   }
 }

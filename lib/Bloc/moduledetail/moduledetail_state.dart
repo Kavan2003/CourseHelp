@@ -1,6 +1,5 @@
 part of 'moduledetail_bloc.dart';
 
-@immutable
 sealed class ModuledetailState {}
 
 final class ModuledetailInitial extends ModuledetailState {}

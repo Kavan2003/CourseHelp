@@ -48,14 +48,16 @@ class _CourseOutlineCardState extends State<CourseOutlineCard> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                widget.isTextField || editModule
-                    ? TextField(
-                        controller: widget.titleController,
-                        decoration: const InputDecoration(
-                          hintText: 'Enter title',
-                        ),
-                      )
-                    : Text(widget.title, style: AppTheme.heading2),
+                Expanded(
+                  child: widget.isTextField || editModule
+                      ? TextField(
+                          controller: widget.titleController,
+                          decoration: const InputDecoration(
+                            hintText: 'Enter title',
+                          ),
+                        )
+                      : Text(widget.title, style: AppTheme.heading2),
+                ),
                 const SizedBox(width: 8),
                 if (widget.isCompleted)
                   const CircleAvatar(

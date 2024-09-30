@@ -1,3 +1,4 @@
+import 'package:coursehelp/Bloc/moduledetail/moduledetail_bloc.dart';
 import 'package:coursehelp/Screens/course_outline_screen.dart';
 import 'package:coursehelp/bloc/courseoutline/courseoutline_bloc.dart';
 import 'package:coursehelp/theme.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => CourseoutlineBloc()),
+        BlocProvider(create: (context) => ModuledetailBloc()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
