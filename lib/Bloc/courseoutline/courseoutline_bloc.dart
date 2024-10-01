@@ -43,8 +43,9 @@ follow format just like given example
         if (response.text != null || response.text != "") {
           final json = jsonDecode(response.text!);
           final course = Course.fromJson(json);
-          prefs.setString(
-              'course_${event.title}_${event.description}', response.text!);
+          prefs.setString('course_${event.title}_${event.description}',
+              response.text!.toString());
+          courseOutline.add('course_${event.title}_${event.description}');
 
           emit(CourseoutlineLoaded(course));
         } else {

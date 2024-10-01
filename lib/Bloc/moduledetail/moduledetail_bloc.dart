@@ -92,6 +92,8 @@ Foramt example is given below
           prefs.setString(
               'module_${event.title}_${event.description}_${event.duration}',
               response.text!);
+          moduleDetails.add(
+              'module_${event.title}_${event.description}_${event.duration}');
 
           emit(ModuledetailLoaded(module));
         } else {

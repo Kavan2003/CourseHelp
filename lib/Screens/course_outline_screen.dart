@@ -1,5 +1,6 @@
 import 'package:coursehelp/Models/course_outine_model.dart';
 import 'package:coursehelp/Screens/modue_details_screen.dart';
+import 'package:coursehelp/Screens/translated_screen.dart';
 import 'package:coursehelp/bloc/courseoutline/courseoutline_bloc.dart';
 import 'package:coursehelp/utli/course_outline_card_component.dart';
 import 'package:flutter/material.dart';
@@ -93,6 +94,12 @@ class _CourseOutlineScreenState extends State<CourseOutlineScreen> {
               onPressed: () {
                 // Translate course outline and content
                 Navigator.of(context).pop();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const LanguageSelectionDialog(),
+                  ),
+                );
               },
             ),
             TextButton(
@@ -150,7 +157,7 @@ class _CourseOutlineScreenState extends State<CourseOutlineScreen> {
           ? Container(
               color: AppTheme.deepBlue,
               child: Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: TextButton(
                   onPressed: () {
                     _showDialogTranslate(context);

@@ -9,10 +9,13 @@ import 'package:google_generative_ai/google_generative_ai.dart';
 
 late final String? geminikey;
 late final GenerativeModel model;
+List<String> courseOutline = [];
+List<String> moduleDetails = [];
 Future<void> main() async {
   await dotenv.load(fileName: ".env");
   geminikey = dotenv.get('API_KEY', fallback: "");
 
+  // print('के लिए Flutter और Dart plu');
   if (geminikey == "") {
     print('No \$API_KEY environment variable');
     return;
@@ -90,17 +93,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 enableSuggestions: true,
                 decoration: AppTheme.inputDecoration.copyWith(
                   labelText: "Course Description",
-                ),
-                maxLines: 10,
-                minLines: 2,
-              ),
-              const SizedBox(height: 20),
-              TextField(
-                controller: descriptionController,
-                cursorOpacityAnimates: true,
-                enableSuggestions: true,
-                decoration: AppTheme.inputDecoration.copyWith(
-                  labelText: "Alternate Language for Course",
                 ),
                 maxLines: 10,
                 minLines: 2,
