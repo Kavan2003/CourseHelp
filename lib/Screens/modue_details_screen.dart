@@ -96,12 +96,10 @@ class _ModuleDetailScreenState extends State<ModuleDetailScreen> {
               );
             } else if (state is ModuledetailError) {
               return Center(
-                child: Text(state.message, style: AppTheme.bodyText),
-              );
+                  child: Text(state.message, style: AppTheme.bodyText));
             } else {
               return const Center(
-                child: Text('Unknown state', style: AppTheme.bodyText),
-              );
+                  child: Text('Unknown state', style: AppTheme.bodyText));
             }
           },
         ),

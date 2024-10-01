@@ -95,6 +95,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 minLines: 2,
               ),
               const SizedBox(height: 20),
+              TextField(
+                controller: descriptionController,
+                cursorOpacityAnimates: true,
+                enableSuggestions: true,
+                decoration: AppTheme.inputDecoration.copyWith(
+                  labelText: "Alternate Language for Course",
+                ),
+                maxLines: 10,
+                minLines: 2,
+              ),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [

@@ -1,6 +1,5 @@
 part of 'courseoutline_bloc.dart';
 
-@immutable
 sealed class CourseoutlineEvent {}
 
 class GenerateCourseOutline extends CourseoutlineEvent {

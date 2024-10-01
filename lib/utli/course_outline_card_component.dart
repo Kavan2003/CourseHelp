@@ -1,6 +1,5 @@
 import 'package:coursehelp/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class CourseOutlineCard extends StatefulWidget {
   final String title;
@@ -14,19 +13,23 @@ class CourseOutlineCard extends StatefulWidget {
   final VoidCallback? onCancel;
   final bool boxtheme;
   final bool isCompleted;
-  const CourseOutlineCard(
-      {super.key,
-      required this.title,
-      required this.description,
-      required this.duration,
-      this.isTextField = false,
-      required this.titleController,
-      required this.descriptionController,
-      required this.durationController,
-      required this.onSubmit,
-      required this.onCancel,
-      this.boxtheme = true,
-      this.isCompleted = false});
+  final bool showModuleDetailsButton; // New property
+
+  const CourseOutlineCard({
+    super.key,
+    required this.title,
+    required this.description,
+    required this.duration,
+    this.isTextField = false,
+    required this.titleController,
+    required this.descriptionController,
+    required this.durationController,
+    required this.onSubmit,
+    required this.onCancel,
+    this.boxtheme = true,
+    this.isCompleted = false,
+    this.showModuleDetailsButton = false, // Initialize new property
+  });
 
   @override
   _CourseOutlineCardState createState() => _CourseOutlineCardState();
@@ -34,6 +37,7 @@ class CourseOutlineCard extends StatefulWidget {
 
 class _CourseOutlineCardState extends State<CourseOutlineCard> {
   bool editModule = false;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -134,12 +138,18 @@ class _CourseOutlineCardState extends State<CourseOutlineCard> {
                               widget.description;
                           widget.durationController.text =
                               widget.duration.toString();
-
-                          // = widget.duration.toString()
                         });
                       },
                       child: const Text('Edit Module'),
                     ),
+            if (widget
+                .showModuleDetailsButton) // Conditionally display the button
+              ElevatedButton(
+                onPressed: () {
+                  // Handle button press
+                },
+                child: const Text('Module Details'),
+              ),
           ],
         ),
       ),

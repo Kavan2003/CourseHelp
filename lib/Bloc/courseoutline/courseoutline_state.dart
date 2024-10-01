@@ -1,6 +1,5 @@
 part of 'courseoutline_bloc.dart';
 
-@immutable
 sealed class CourseoutlineState {}
 
 final class CourseoutlineInitial extends CourseoutlineState {}

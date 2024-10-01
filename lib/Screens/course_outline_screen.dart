@@ -34,6 +34,7 @@ class _CourseOutlineScreenState extends State<CourseOutlineScreen> {
   bool isPlusClick = false;
   bool reorder = false;
   bool isOutlineComplete = false;
+  bool isTranslate = false;
 
   @override
   void initState() {
@@ -77,43 +78,100 @@ class _CourseOutlineScreenState extends State<CourseOutlineScreen> {
     );
   }
 
+  void _showDialogTranslate(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text(
+              'Do you want to translate the course outline and content?'),
+          content: const Text(
+              'Do this only if you have clicked on each module to generate content'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Yes'),
+              onPressed: () {
+                // Translate course outline and content
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text('No'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: TextButton(
-        style: AppTheme.primaryButton.copyWith(
-            padding: WidgetStateProperty.all(const EdgeInsets.all(10)),
-            elevation: WidgetStateProperty.all(7)),
-        onPressed: () {
-          final state = context.read<CourseoutlineBloc>().state;
-          if (state is CourseoutlineLoaded) {
-            _showDialog(context);
-            setState(() {
-              isOutlineComplete = true;
-              state.course.modules.forEach((module) {
-                if (module.title.isEmpty ||
-                    module.description.isEmpty ||
-                    module.duration == 0) {
-                  isOutlineComplete = false;
+      floatingActionButton: (!isOutlineComplete)
+          ? TextButton(
+              style: AppTheme.primaryButton.copyWith(
+                  padding: WidgetStateProperty.all(const EdgeInsets.all(10)),
+                  elevation: WidgetStateProperty.all(7)),
+              onPressed: () {
+                final state = context.read<CourseoutlineBloc>().state;
+                if (state is CourseoutlineLoaded) {
+                  _showDialog(context);
+                  setState(() {
+                    isOutlineComplete = true;
+                    state.course.modules.forEach((module) {
+                      if (module.title.isEmpty ||
+                          module.description.isEmpty ||
+                          module.duration == 0) {
+                        isOutlineComplete = false;
+                      } else {
+                        module.isAccepted = true;
+                      }
+                    });
+                  });
                 } else {
-                  module.isAccepted = true;
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Something went wrong'),
+                      duration: Duration(seconds: 2),
+                    ),
+                  );
                 }
-              });
-            });
-          } else {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Something went wrong'),
-                duration: Duration(seconds: 2),
+              },
+              child: const Text(
+                "Confirm Course Outline >",
+                style: AppTheme.buttonText,
               ),
-            );
-          }
-        },
-        child: const Text(
-          "Confirm Course Outline >",
-          style: AppTheme.buttonText,
-        ),
-      ),
+            )
+          : null,
+      bottomNavigationBar: (isOutlineComplete)
+          ? Container(
+              color: AppTheme.deepBlue,
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: TextButton(
+                  onPressed: () {
+                    _showDialogTranslate(context);
+                    setState(() {
+                      isTranslate = true;
+                    });
+                  },
+                  style: AppTheme.primaryButton.copyWith(
+                    padding:
+                        MaterialStateProperty.all(const EdgeInsets.all(10)),
+                    elevation: MaterialStateProperty.all(7),
+                  ),
+                  child: Text(
+                    'Translate course outline and content ?',
+                    style:
+                        AppTheme.buttonText.copyWith(color: AppTheme.offWhite),
+                  ),
+                ),
+              ),
+            )
+          : null,
       appBar: AppBar(
         title: const Text("Course Outline"),
       ),

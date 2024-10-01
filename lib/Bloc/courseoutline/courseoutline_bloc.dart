@@ -4,7 +4,6 @@ import 'package:bloc/bloc.dart';
 import 'package:coursehelp/Models/course_outine_model.dart';
 import 'package:coursehelp/main.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
-import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 part 'courseoutline_event.dart';
