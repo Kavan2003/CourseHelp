@@ -6,12 +6,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 late final String? geminikey;
 late final GenerativeModel model;
 List<String> courseOutline = [];
 List<String> moduleDetails = [];
 Future<void> main() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await dotenv.load(fileName: ".env");
   geminikey = dotenv.get('API_KEY', fallback: "");
 
